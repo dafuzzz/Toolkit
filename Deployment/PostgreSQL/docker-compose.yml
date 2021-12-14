@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+
+    db:
+        image: postgres:10
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_PASSWORD=123456
+        volumes:
+            - ./dbdata:/var/lib/postgresql/data
+            - ./pg_sharedir:/sharedir
+
+    pgadmin4:
+        image: dpage/pgadmin4
+        restart: always
+        ports:
+            - "7080:80"
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=admin@gmail.com
+            - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+            - PGADMIN_LISTEN_ADDRESS=0.0.0.0
+        volumes:
+            - ./pgadmin4_sharedir:/sharedir
+
